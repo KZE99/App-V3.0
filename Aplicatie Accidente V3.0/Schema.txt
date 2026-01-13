@@ -1,0 +1,29 @@
+AplicatieGenerareDocumente/
+├── data/
+│   └── login_data.json
+├── src/
+│   ├── __init__.py
+│   ├── login/
+│   │   ├── __init__.py
+│   │   └── login_window.py
+│   ├── main_app/
+│   │   ├── __init__.py
+│   │   └── main_page.py
+│   ├── accident_rutier/
+│   │   ├── __init__.py
+│   │   ├── accident_main_page.py
+│   │   └── interfaces/
+│   │       ├── __init__.py
+│   │       ├── base_interface.py
+│   │       ├── vehicle_tabs.py
+│   │       ├── victim_frame.py
+│   │       └── base_accident_window.py
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── data_manager.py
+│   │   ├── doc_generator.py
+│   │   └── excel_manager.py
+│   └── assets/
+│       └── icons/
+├── main.py
+└── requirements.txt
