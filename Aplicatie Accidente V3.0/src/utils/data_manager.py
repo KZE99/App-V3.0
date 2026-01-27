@@ -8,15 +8,19 @@ from datetime import datetime
 # Folderul de backup în profilul utilizatorului (conform BARSV V3.2)
 BASE_BACKUP_DIR = os.path.join(os.path.expanduser("~"), "BARSV APP Backup")
 SETTINGS_FILE = os.path.join(BASE_BACKUP_DIR, "settings.json")
-DATA_DIR = "data"
+
+# Definirea căii absolute către directorul 'data' din rădăcina proiectului
+# Structura: root/src/utils/data_manager.py -> root/data
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DATA_DIR = os.path.join(BASE_DIR, "data")
 LOGIN_FILE = os.path.join(DATA_DIR, "login_data.json")
 
 # --- SECURITATE (LISTĂ STAȚII AUTORIZATE) ---
 ALLOWED_HOSTNAMES = [
-    'DESKTOP-7H7ELRD', 'DESKTOP-1NNK2DH', 'DESKTOP-2JSKFMS', 
-    'PC-B1-BR-039', 'PC-B1-BR-040', 'PC-B1-BR041', 'PC-B1-BR042', 
-    'PC-B1-BR043', 'PC-B1-BR044', 'PC-B1-BR045', 'PC-B1-BR046', 
-    'PC-B1-BR047', 'PC-B1-BR048', 'PC-B1-BR049', 'PC-B1-BR050', 
+    'DESKTOP-7H7ELRD', 'DESKTOP-1NNK2DH', 'DESKTOP-2JSKFMS',
+    'PC-B1-BR-039', 'PC-B1-BR-040', 'PC-B1-BR041', 'PC-B1-BR042',
+    'PC-B1-BR043', 'PC-B1-BR044', 'PC-B1-BR045', 'PC-B1-BR046',
+    'PC-B1-BR047', 'PC-B1-BR048', 'PC-B1-BR049', 'PC-B1-BR050',
     'PC-B1-BR051', 'PC-B1-BR052', 'DESKTOP-GICB227'
 ]
 
@@ -76,7 +80,7 @@ def load_settings():
         'grad_sef_br': 'Comisar-șef de poliție',
         'nume_sef_br': 'VLĂȘCEANU IONUȚ'
     }
-    
+
     if os.path.exists(SETTINGS_FILE):
         try:
             with open(SETTINGS_FILE, 'r', encoding='utf-8') as f:
@@ -109,7 +113,7 @@ def save_excel_backup(data_dict):
 
         # Curățăm datele pentru DataFrame
         cleaned = {k: str(v) for k, v in data_dict.items() if not isinstance(v, (list, dict))}
-        
+
         df = pd.DataFrame([cleaned])
         df.to_excel(file_path, index=False, engine='openpyxl')
         return True, file_path
